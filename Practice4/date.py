@@ -52,23 +52,6 @@ print(f"Date 2: {date2}")
 print(f"Difference: {difference}")
 print(f"Difference in seconds: {difference_seconds} seconds")
 
-# Method 2: With user input (current date and a past date)
-from datetime import datetime, timedelta
-
-# Get current date
-now = datetime.now()
-
-# Create a past date (e.g., 5 days ago)
-past_date = now - timedelta(days=5)
-
-# Calculate difference in seconds
-diff_seconds = (now - past_date).total_seconds()
-
-print(f"\nCurrent date: {now}")
-print(f"Past date (5 days ago): {past_date}")
-print(f"Difference in seconds: {diff_seconds} seconds")
-print(f"Which is {diff_seconds / 3600:.2f} hours or {diff_seconds / 86400:.2f} days")
-
 #Task 5
 
 print("=" * 50)
