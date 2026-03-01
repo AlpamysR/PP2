@@ -1,50 +1,38 @@
 import re
 
-# 1. Match a string that has 'a' followed by zero or more 'b's
 def exercise_1(text):
     return re.findall(r'ab*', text)
 
-# 2. Match a string that has 'a' followed by two to three 'b's
 def exercise_2(text):
     return re.findall(r'ab{2,3}', text)
 
-# 3. Find sequences of lowercase letters joined with an underscore
 def exercise_3(text):
     return re.findall(r'[a-z]+_[a-z]+', text)
 
-# 4. Find sequences of one uppercase letter followed by lowercase letters
 def exercise_4(text):
     return re.findall(r'[A-Z][a-z]+', text)
 
-# 5. Match a string that has 'a' followed by anything, ending in 'b'
 def exercise_5(text):
     return re.findall(r'a.*b', text)
 
-# 6. Replace all occurrences of space, comma, or dot with a colon
 def exercise_6(text):
     return re.sub(r'[ ,.]', ':', text)
 
-# 7. Convert snake_case string to camelCase
 def exercise_7(text):
     components = text.split('_')
     return components[0] + ''.join(x.title() for x in components[1:])
 
-# 8. Split a string at uppercase letters
 def exercise_8(text):
     return re.split(r'(?=[A-Z])', text)
 
-# 9. Insert spaces between words starting with capital letters
 def exercise_9(text):
     return re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', text)
 
-# 10. Convert camelCase string to snake_case
 def exercise_10(text):
     s = re.sub(r'(?<=[a-z])(?=[A-Z])', '_', text)
     return s.lower()
-    
-  sep = '-' * 55
 
-  print(sep)
+
   print("Exercise 1 – 'a' followed by zero or more 'b's")
   samples = ['ac', 'abc', 'abbc', 'abbbc', 'a', 'aab']
   for s in samples:
