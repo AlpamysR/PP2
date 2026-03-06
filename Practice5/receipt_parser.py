@@ -37,12 +37,7 @@ def parse_receipt(text):
     if address_match:
         receipt['address'] = address_match.group(0).strip()
 
-    # Extract products
-    # Pattern: number. product_name\nqty x price\ntotal_price
-    product_pattern = re.compile(
-        r'(\d+)\.\n(.+?)\n([\d\s]+),000\s*x\s*([\d\s]+),00\n([\d\s]+),00',
-        re.DOTALL
-    )
+    # Extract product
 
     products = []
     # Alternative approach: split by item numbers
@@ -123,3 +118,7 @@ def main():
         json.dump(receipt, f, ensure_ascii=False, indent=2)
 
     print("JSON saved to receipt_parsed.json")
+
+
+if __name__ == '__main__':
+    main()
