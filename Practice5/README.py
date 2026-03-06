@@ -58,7 +58,7 @@ def exercise_10(text):
 
   print(sep)
     print("Exercise 5 – 'a' followed by anything, ending in 'b'")
-    samples = ['aab', 'a123b', 'axyzb', 'ab', 'abc', 'ba']
+    samples = ['aab', 'a123b', 'axyzb', 'ab', 'ba']
     for s in samples:
         print(f"  '{s}' → {exercise_5(s)}")
 
