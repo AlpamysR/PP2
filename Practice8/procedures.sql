@@ -1,47 +1,59 @@
-CREATE OR REPLACE PROCEDURE upsert_contact(
+CREATE OR REPLACE PROCEDURE insert_or_update_user(
     p_name TEXT,
-    p_phone TEXT,
-    p_email TEXT
+    p_surname TEXT,
+    p_phone TEXT
 )
-LANGUAGE plpgsql AS $$
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    IF EXISTS (SELECT 1 FROM contacts WHERE name = p_name) THEN
-        UPDATE contacts
-        SET phone = p_phone, email = p_email
-        WHERE name = p_name;
+    IF EXISTS (
+        SELECT 1 FROM phonebook
+        WHERE name = p_name AND surname = p_surname
+    ) THEN
+        UPDATE phonebook
+        SET phone = p_phone
+        WHERE name = p_name AND surname = p_surname;
     ELSE
-        INSERT INTO contacts(name, phone, email)
-        VALUES (p_name, p_phone, p_email);
+        INSERT INTO phonebook(name, surname, phone)
+        VALUES (p_name, p_surname, p_phone);
     END IF;
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE bulk_insert_contacts(
+CREATE OR REPLACE PROCEDURE insert_many_users(
     names TEXT[],
-    phones TEXT[],
-    emails TEXT[]
+    surnames TEXT[],
+    phones TEXT[]
 )
-LANGUAGE plpgsql AS $$
+LANGUAGE plpgsql
+AS $$
 DECLARE
     i INT;
+    invalid_data TEXT[] := '{}';
 BEGIN
     FOR i IN 1..array_length(names, 1) LOOP
-        
-        IF phones[i] NOT LIKE '+%' THEN
-            RAISE NOTICE 'Invalid phone: %', phones[i];
+
+        IF phones[i] ~ '^[0-9]{10,15}$' THEN
+            INSERT INTO phonebook(name, surname, phone)
+            VALUES (names[i], surnames[i], phones[i]);
         ELSE
-            CALL upsert_contact(names[i], phones[i], emails[i]);
+            invalid_data := array_append(invalid_data, names[i] || ' ' || phones[i]);
         END IF;
 
     END LOOP;
+
+    RAISE NOTICE 'Invalid data: %', invalid_data;
 END;
 $$;
 
-
-CREATE OR REPLACE PROCEDURE delete_contact(p_value TEXT)
-LANGUAGE plpgsql AS $$
+CREATE OR REPLACE PROCEDURE delete_user(
+    p_value TEXT
+)
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    DELETE FROM contacts
-    WHERE name = p_value OR phone = p_value;
+    DELETE FROM phonebook
+    WHERE name = p_value
+       OR phone = p_value;
 END;
 $$;
