@@ -4,10 +4,10 @@ $$
 BEGIN
     RETURN QUERY
     SELECT *
-    FROM phonebook
-    WHERE name ILIKE '%' || pattern || '%'
-       OR surname ILIKE '%' || pattern || '%'
-       OR phone ILIKE '%' || pattern || '%';
+    FROM phonebook p
+    WHERE p.name ILIKE '%' || pattern || '%'
+       OR p.surname ILIKE '%' || pattern || '%'
+       OR p.phone ILIKE '%' || pattern || '%';
 END;
 $$ LANGUAGE plpgsql;
 
@@ -21,4 +21,4 @@ BEGIN
     ORDER BY id
     LIMIT limit_val OFFSET offset_val;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;    
