@@ -11,8 +11,8 @@ COLS      = 30          # number of columns
 ROWS      = 25          # number of rows
 WIDTH     = CELL * COLS
 HEIGHT    = CELL * ROWS
-FPS_BASE  = 8           # starting frames-per-second (snake speed)
-FPS_STEP  = 2           # extra FPS gained per level
+FPS_BASE  = 4        # starting frames-per-second (snake speed)
+FPS_STEP  = 1           # extra FPS gained per level
 FOODS_PER_LEVEL = 3     # foods needed to advance one level
 
 # Colours
