@@ -10,8 +10,8 @@ COLS            = 30
 ROWS            = 25
 WIDTH           = CELL * COLS
 HEIGHT          = CELL * ROWS
-FPS_BASE        = 8
-FPS_STEP        = 2
+FPS_BASE        = 3
+FPS_STEP        = 1
 FOODS_PER_LEVEL = 3   # foods needed to advance one level
 
 # Maximum food items on screen at once
